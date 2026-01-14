@@ -26,7 +26,7 @@ public class Frame {
         return !rolls.isEmpty() && rolls.getFirst() == 10;
     }
 
-    public boolean isSplit() {
+    public boolean isSpare() {
         return rolls.size() >= 2 && rolls.getFirst() + rolls.get(1) == 10;
     }
 

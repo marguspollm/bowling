@@ -38,8 +38,8 @@ public class Bowling {
             if (!frame.isLastFrame()) {
                 if (frame.isStrike()) {
                     score += getStrikeScore(i);
-                } else if (frame.isSplit()) {
-                    score += getSplitScore(i);
+                } else if (frame.isSpare()) {
+                    score += getSpareScore(i);
                 }
             }
             frame.setScore(score);
@@ -47,7 +47,7 @@ public class Bowling {
         totalScore = score;
     }
 
-    private int getSplitScore(int i) {
+    private int getSpareScore(int i) {
         List<Integer> next = getNextRolls(i, 1);
         return next.isEmpty() ? 0 : next.getFirst();
     }

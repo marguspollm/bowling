@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class PlayerController {
     @Autowired
     private PlayerService playerService;
@@ -17,7 +18,7 @@ public class PlayerController {
     }
 
     @GetMapping("/player/{id}")
-    public Player addPlayer(@PathVariable String id){
+    public Player getPlayer(@PathVariable String id){
         return playerService.getPlayer(id);
     }
 }

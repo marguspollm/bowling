@@ -3,19 +3,19 @@
   text-align: center;
 }
 
-.frame .frame-number {
+.frame-number {
   font-size: 0.8rem;
   opacity: 0.7;
   margin-bottom: 0.3rem;
 }
 
-.frame .rolls {
+.frame-rolls {
   display: flex;
   justify-content: center;
   gap: 4px;
   margin-bottom: 0.4rem;
 }
-.frame .roll {
+.frame-roll {
   width: 22px;
   height: 22px;
   display: flex;
@@ -24,7 +24,7 @@
   font-size: 0.85rem;
 }
 
-.frame .score {
+.frame-score {
   font-size: 1rem;
   font-weight: bold;
 }

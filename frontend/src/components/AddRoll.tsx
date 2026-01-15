@@ -6,28 +6,41 @@ type AddRollProps = {
 };
 
 function AddRoll({ onSubmit }: AddRollProps) {
-  const [pins, setPins] = useState(0);
+  const [pins, setPins] = useState("");
+  const [buttonDisabled, setButtonDisabled] = useState(true);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setPins(Number(event.target.value));
+    const value = event.target.value;
+    const nr = Number(event.target.value);
+    console.log(nr);
+    if (nr <= 10 && nr >= 0) {
+      setPins(value);
+      setButtonDisabled(false);
+    } else {
+      setButtonDisabled(true);
+    }
   };
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit(pins);
-    setPins(0);
+    onSubmit(Number(pins));
+    setPins("");
+    setButtonDisabled(true);
   };
 
   return (
     <form className="add-roll-form" onSubmit={submit}>
       <input
-        type="number"
-        min={0}
-        max={10}
+        type="text"
         value={pins}
         onChange={handleChange}
+        className="add-roll-input"
       />
-      <button type="submit" className="add-roll-button">
+      <button
+        type="submit"
+        className="add-roll-button"
+        disabled={buttonDisabled}
+      >
         Add Roll
       </button>
     </form>

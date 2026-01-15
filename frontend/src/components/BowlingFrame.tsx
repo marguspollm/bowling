@@ -13,7 +13,7 @@ function BowlingFrame({ frame, index }: BowlingFrameProps) {
       if (frame.strike) display = "X";
       if (frame.spare && idx == 1) display = "/";
       return (
-        <div key={idx} className="roll">
+        <div key={idx} className="frame-roll">
           {display}
         </div>
       );
@@ -23,8 +23,8 @@ function BowlingFrame({ frame, index }: BowlingFrameProps) {
   return (
     <div key={index} className="frame">
       <div className="frame-number">Frame {index + 1}</div>
-      <div className="rolls">{displayRoll(frame)}</div>
-      <div className="score">{frame.score}</div>
+      <div className="frame-rolls">{displayRoll(frame)}</div>
+      <div className="frame-score">{frame.score}</div>
     </div>
   );
 }

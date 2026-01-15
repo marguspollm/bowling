@@ -22,7 +22,8 @@ function Game() {
       body: JSON.stringify(payload),
     })
       .then(res => res.json())
-      .then(json => setPlayers(prev => [...prev, json]));
+      .then(json => setPlayers(prev => [...prev, json]))
+      .catch(err => console.log(err));
   };
 
   const addRoll = (pins: number) => {
@@ -38,8 +39,14 @@ function Game() {
       },
       body: JSON.stringify(payload),
     })
-      .then(res => res.json())
-      .then(json => setSelectedPlayer(json));
+      .then(res => {
+        if (!res.ok) throw new Error("");
+        return res.json();
+      })
+      .then(json => {
+        setSelectedPlayer(json);
+      })
+      .catch(err => console.log(err));
   };
 
   const onSelectPlayer = (id: string) => {
@@ -57,9 +64,8 @@ function Game() {
   }, []);
   return (
     <>
-      <div className="players-container">
-        <AddPlayer onSubmit={addPlayer} />
-
+      <div className="game-container">
+        <PlayerDetails game={selectedPlayer} onAddRoll={addRoll} />
         <div className="player-list">
           {players.map(player => {
             const isSelected = selectedPlayer?.id === player.id;
@@ -74,7 +80,7 @@ function Game() {
             );
           })}
         </div>
-        <PlayerDetails game={selectedPlayer} onAddRoll={addRoll} />
+        <AddPlayer onSubmit={addPlayer} />
       </div>
     </>
   );

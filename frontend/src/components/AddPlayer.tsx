@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "../css/AddPlayer.css";
 
 type AddPlayerProps = {
   onSubmit: (name: string) => void;
@@ -18,9 +19,17 @@ function AddPlayer({ onSubmit }: AddPlayerProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input type="text" value={name} required onChange={handleChange} />
-      <button type="submit">Add</button>
+    <form onSubmit={handleSubmit} className="add-player-form">
+      <input
+        type="text"
+        value={name}
+        required
+        onChange={handleChange}
+        className="add-player-input"
+      />
+      <button type="submit" className="add-player-button">
+        Add Player
+      </button>
     </form>
   );
 }

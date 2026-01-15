@@ -30,7 +30,6 @@ public class Bowling {
         int frameSize = frames.size();
         int score = 0;
         for (int i = 0; i < frameSize; i++) {
-
             Frame frame = frames.get(i);
             List<Integer> rolls = frame.getRolls();
             score += rolls.stream().mapToInt(Integer::intValue).sum();
@@ -49,7 +48,7 @@ public class Bowling {
 
     private int getSpareScore(int i) {
         List<Integer> next = getNextRolls(i, 1);
-        return next.isEmpty() ? 0 : next.getFirst();
+        return next.stream().mapToInt(Integer::intValue).sum();
     }
 
     private int getStrikeScore(int i) {

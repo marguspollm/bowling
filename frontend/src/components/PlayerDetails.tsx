@@ -1,5 +1,7 @@
-import type { PlayerGame } from "../../types";
+import type { PlayerGame } from "../types";
 import AddRoll from "./AddRoll";
+import BowlingFrame from "./BowlingFrame";
+import "../css/PlayerDetails.css";
 
 type Props = {
   game: PlayerGame | null;
@@ -7,19 +9,17 @@ type Props = {
 };
 
 function PlayerDetails({ game, onAddRoll }: Props) {
-  if (!game) return <p>Select a player</p>;
+  if (!game) return;
 
   return (
-    <div>
+    <div className="game-container">
       <h2>{game.name}</h2> <p>Total Score: {game.bowling.totalScore}</p>
-      <AddRoll onSubmit={onAddRoll} /> <h3>Frames</h3>
-      <ul>
+      <AddRoll onSubmit={onAddRoll} />
+      <div className="scoreboard">
         {game.bowling.frames.map((f, i) => (
-          <li key={i}>
-            Frame {i + 1}: Rolls [{f.rolls.join(", ")}], Score: {f.score}
-          </li>
+          <BowlingFrame frame={f} index={i} />
         ))}
-      </ul>
+      </div>
     </div>
   );
 }

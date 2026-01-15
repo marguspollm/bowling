@@ -17,4 +17,6 @@ export type Bowling = {
 export type Frame = {
   rolls: number[];
   score: number;
+  spare: boolean;
+  strike: boolean;
 };

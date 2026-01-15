@@ -1,0 +1,27 @@
+.add-roll-form {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+.add-roll-input {
+  width: 80px;
+  padding: 0.5rem 0.7rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 2px solid #333;
+  outline: none;
+  text-align: center;
+}
+
+.add-roll-button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  background: #00e6a8;
+  color: #1c1c1f;
+}

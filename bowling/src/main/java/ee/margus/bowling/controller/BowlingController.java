@@ -2,8 +2,6 @@ package ee.margus.bowling.controller;
 
 import ee.margus.bowling.dto.ResponseDTO;
 import ee.margus.bowling.dto.RollDTO;
-import ee.margus.bowling.model.Bowling;
-import ee.margus.bowling.model.Player;
 import ee.margus.bowling.service.BowlingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -18,7 +16,7 @@ public class BowlingController {
     private BowlingService bowlingService;
 
     @PostMapping("/roll")
-    public ResponseDTO addRoll(@RequestBody RollDTO rollDTO){
+    public ResponseDTO addRoll(@RequestBody RollDTO rollDTO) {
         return bowlingService.addRoll(rollDTO.getPins(), rollDTO.getPlayerId());
     }
 }

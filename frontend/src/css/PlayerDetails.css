@@ -1,0 +1,24 @@
+.scoreboard {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 8px;
+  margin-top: 1.5rem;
+}
+
+.game-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.game-container h2 {
+  font-size: 2rem;
+  margin-bottom: 0.3rem;
+}
+
+.game-container p {
+  font-size: 1.2rem;
+  margin-bottom: 1.2rem;
+  font-weight: bold;
+}

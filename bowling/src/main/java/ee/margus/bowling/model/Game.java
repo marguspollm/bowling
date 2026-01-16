@@ -6,28 +6,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-public class Bowling {
+public class Game {
+    private String id;
     private int totalScore;
-    private List<Frame> frames = new ArrayList<>();
+    private List<Frame> frames = createAllFrames();
+    private Player player;
 
-
-    public void setFrames(int pins) {
-        createFrame();
-        int current = frames.size() - 1;
-        frames.get(current).addRoll(pins);
-        calculateFrameScores();
+    private List<Frame> createAllFrames(){
+        List<Frame> list = new ArrayList<>();
+        for (int i = 1; i < 10; i++) {
+            list.add(new Frame());
+        }
+        Frame lastFrame = new Frame();
+        lastFrame.setLastFrame(true);
+        list.add(lastFrame);
+        return list;
     }
 
-    private void createFrame() {
-        if (frames.size() == 10 && frames.getLast().isComplete()) throw new RuntimeException("Max frames reached");
-        if (frames.isEmpty() || frames.getLast().isComplete()) {
-            frames.add(new Frame());
-            if (frames.size() == 10) frames.getLast().setLastFrame(true);
-        }
+    public void setFrame(int pins) {
+        Frame currentFrame = frames.stream().filter(frame -> !frame.isComplete()).toList().getFirst();
+        currentFrame.addRoll(pins);
     }
 
     public void calculateFrameScores() {
-        int frameSize = frames.size();
+        var framesWithRolls = frames.stream().filter(frame -> !frame.getRolls().isEmpty()).toList();
+        int frameSize = framesWithRolls.size();
         int score = 0;
         for (int i = 0; i < frameSize; i++) {
             Frame frame = frames.get(i);
@@ -65,5 +68,9 @@ public class Bowling {
             }
         }
         return result;
+    }
+
+    public boolean isFinished(){
+        return frames.getLast().isComplete();
     }
 }

@@ -5,5 +5,5 @@ import lombok.Data;
 @Data
 public class RollDTO {
     private int pins;
-    private String playerId;
+    private String gameId;
 }

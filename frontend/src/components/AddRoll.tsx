@@ -12,7 +12,7 @@ function AddRoll({ onSubmit }: AddRollProps) {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     const nr = Number(event.target.value);
-    console.log(nr);
+
     if (nr <= 10 && nr >= 0) {
       setPins(value);
       setButtonDisabled(false);

@@ -1,9 +1,9 @@
 package ee.margus.bowling.service;
 
 import ee.margus.bowling.dto.CreatePlayerDTO;
-import ee.margus.bowling.model.Bowling;
+import ee.margus.bowling.model.Game;
 import ee.margus.bowling.model.Player;
-import ee.margus.bowling.repository.PlayerRepository;
+import ee.margus.bowling.repository.GameRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -18,7 +18,7 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class PlayerServiceTest {
     @Mock
-    private PlayerRepository playerRepository;
+    private GameRepository gameRepository;
     @InjectMocks
     private PlayerService playerService;
 
@@ -28,9 +28,9 @@ class PlayerServiceTest {
         dto.setName("Test");
         Player player = new Player();
         player.setName("Test");
-        player.setBowling(new Bowling());
+        player.setBowling(new Game());
 
-        when(playerRepository.savePlayer(any(Player.class))).thenReturn(player);
+        when(gameRepository.savePlayer(any(Player.class))).thenReturn(player);
 
         assertEquals(player, playerService.addPlayer(dto));
     }
@@ -41,11 +41,11 @@ class PlayerServiceTest {
         player.setId("test-id");
         player.setName("Test");
 
-        when(playerRepository.getPlayer("test-id")).thenReturn(player);
+        when(gameRepository.getPlayer("test-id")).thenReturn(player);
 
         Player result = playerService.getPlayer("test-id");
 
         assertEquals(player, result);
-        verify(playerRepository).getPlayer("test-id");
+        verify(gameRepository).getPlayer("test-id");
     }
 }

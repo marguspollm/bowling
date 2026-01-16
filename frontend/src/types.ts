@@ -3,15 +3,16 @@ export type Player = {
   name: string;
 };
 
-export type PlayerGame = {
+export type Roll = {
+  pins: number;
   id: string;
-  name: string;
-  bowling: Bowling;
 };
 
-export type Bowling = {
+export type Game = {
+  id: string;
   frames: Frame[];
   totalScore: number;
+  player: Player;
 };
 
 export type Frame = {

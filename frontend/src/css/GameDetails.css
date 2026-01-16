@@ -1,0 +1,13 @@
+.details-container {
+  flex-grow: 1;
+  padding: 0.5rem;
+  text-align: center;
+}
+
+.details {
+  display: flex;
+  gap: 4px;
+  padding: 4px 0;
+  border-top: 1px solid #ddd;
+  flex-wrap: wrap;
+}

@@ -7,12 +7,12 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-class PlayerRepositoryTest {
-    private PlayerRepository repository;
+class GameRepositoryTest {
+    private GameRepository repository;
 
     @BeforeEach
     void setUp() {
-        repository = new PlayerRepository();
+        repository = new GameRepository();
     }
 
     @Test

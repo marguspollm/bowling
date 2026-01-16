@@ -6,5 +6,4 @@ import lombok.Data;
 public class Player {
     private String id;
     private String name;
-    private Bowling bowling;
 }

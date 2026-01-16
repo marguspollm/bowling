@@ -1,8 +1,7 @@
 package ee.margus.bowling.service;
 
-import ee.margus.bowling.model.Bowling;
+import ee.margus.bowling.model.Game;
 import ee.margus.bowling.model.Player;
-import ee.margus.bowling.repository.PlayerRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -14,11 +13,11 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-class BowlingServiceTest {
+class GameServiceTest {
     @Mock
     private PlayerService playerService;
     @InjectMocks
-    private BowlingService bowlingService;
+    private GameService gameService;
 
     @Test
     void whenAddRoll_thenUpdateFrameAndReturnPlayer() {
@@ -27,11 +26,11 @@ class BowlingServiceTest {
         Player player = new Player();
         player.setId("test-id");
         player.setName("Test");
-        player.setBowling(new Bowling());
+        player.setBowling(new Game());
 
         when(playerService.getPlayer(any(String.class))).thenReturn(player);
 
-        Player result = bowlingService.addRoll(pins, playerId);
+        Player result = gameService.addRoll(pins, playerId);
 
         assertEquals(result, player);
         assertEquals(5, result.getBowling().getTotalScore());

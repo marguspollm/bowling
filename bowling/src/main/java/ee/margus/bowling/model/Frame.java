@@ -12,9 +12,6 @@ public class Frame {
     private List<Integer> rolls = new ArrayList<>();
     private int score;
     private boolean lastFrame = false;
-    private boolean strike;
-    private boolean spare;
-    private boolean complete;
 
     public void addRoll(int pins) {
         if (isLastFrame()) {
@@ -43,23 +40,5 @@ public class Frame {
             if (isStrike()) return true;
             return rolls.size() == 2;
         }
-    }
-
-    public void updateStrike() {
-        strike = isStrike();
-    }
-
-    public void updateSpare() {
-        spare = isSpare();
-    }
-
-    public void updateComplete() {
-        complete = isComplete();
-    }
-
-    public void updateFields() {
-        updateStrike();
-        updateSpare();
-        updateComplete();
     }
 }

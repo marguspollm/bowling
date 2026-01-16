@@ -21,17 +21,17 @@ public class GameController {
     }
 
     @PostMapping("/create")
-    public Game addPlayer(@RequestBody CreatePlayerDTO createPlayerDTO) {
+    public Game createGame(@RequestBody CreatePlayerDTO createPlayerDTO) {
         return gameService.addGame(createPlayerDTO);
     }
 
     @GetMapping("/game/{id}")
-    public Game getPlayer(@PathVariable String id) {
+    public Game getGame(@PathVariable String id) {
         return gameService.getGame(id);
     }
 
     @GetMapping("/all-games")
-    public List<Game> getPlayers() {
+    public List<Game> getAllGames() {
         return gameService.getAllGames();
     }
 

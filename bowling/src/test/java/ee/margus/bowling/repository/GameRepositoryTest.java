@@ -1,11 +1,13 @@
 package ee.margus.bowling.repository;
 
+import ee.margus.bowling.model.Game;
 import ee.margus.bowling.model.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class GameRepositoryTest {
     private GameRepository repository;
@@ -16,27 +18,87 @@ class GameRepositoryTest {
     }
 
     @Test
-    void whenSavePlayer_thenReturnPlayer() {
+    void whenSaveGame_thenReturnGame() {
         Player player = new Player();
         player.setId("test-id");
         player.setName("test");
-        Player saved = repository.savePlayer(player);
+        Game game = new Game();
+        game.setId("test");
+        game.setPlayer(player);
+        Game saved = repository.saveGame(game);
 
-        assertEquals(player, saved);
+        assertEquals(game, saved);
+        assertEquals(1, repository.getAllGames().size());
     }
 
     @Test
-    void getPlayer_thenReturnException() {
-        assertNull(repository.getPlayer("bad-id"));
+    void getGame_thenReturnException() {
+        assertNull(repository.getGame("bad-id"));
     }
 
     @Test
-    void whenGetPlayer_thenReturnPlayer() {
-        Player player = new Player();
-        player.setId("test-id");
-        player.setName("Test");
+    void whenGetGame_thenReturnGame() {
+        Game game = new Game();
+        game.setId("test");
 
-        repository.savePlayer(player);
-        assertEquals(player, repository.getPlayer("test-id"));
+        repository.saveGame(game);
+        assertEquals(game, repository.getGame("test"));
+    }
+
+    @Test
+    void getAllGames() {
+        for (int i = 0; i < 3; i++) {
+            Game game = new Game();
+            game.setId("test" + i);
+            repository.saveGame(game);
+        }
+
+        assertEquals(3, repository.getAllGames().size());
+    }
+
+    @Test
+    void givenConfirmIsTrueAndUnfinishedGames_deleteALlGames() {
+        Game game = new Game();
+        game.setId("test");
+
+        repository.saveGame(game);
+        repository.delete(true);
+
+        assertEquals(0, repository.getAllGames().size());
+    }
+
+    @Test
+    void givenConfirmIsTrueAndNoUnfinishedGames_thenThrowException() {
+        Game game = new Game();
+        game.setId("test");
+        game.getFrames().getLast().setRolls(List.of(1, 1));
+
+        repository.saveGame(game);
+        repository.delete(true);
+
+        assertEquals(0, repository.getAllGames().size());
+    }
+
+    @Test
+    void givenConfirmIsFalseAndNoUnfinishedGames_thenDeleteAllGames() {
+        Game game = new Game();
+        game.setId("test");
+        game.getFrames().getLast().setRolls(List.of(1, 1));
+
+        repository.saveGame(game);
+        repository.delete(false);
+
+        assertEquals(0, repository.getAllGames().size());
+    }
+
+    @Test
+    void givenConfirmIsFalseAndUnfinishedGames_thenThrowException() {
+        Game game = new Game();
+        game.setId("test");
+        game.getFrames().getLast().setRolls(List.of(1));
+
+        repository.saveGame(game);
+
+        assertThrows(RuntimeException.class, () -> repository.delete(false));
     }
 }

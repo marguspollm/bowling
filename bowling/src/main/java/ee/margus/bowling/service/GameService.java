@@ -45,8 +45,8 @@ public class GameService {
         Game game = getGame(gameId);
         game.setFrame(pins);
         game.calculateFrameScores();
-        game.getFrames().forEach(Frame::updateFields);
-        game.isFinished();
+//        game.getFrames().forEach(Frame::updateFields);
+//        game.isFinished();
 
         return getAllGames();
     }

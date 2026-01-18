@@ -13,6 +13,7 @@ export type Game = {
   frames: Frame[];
   totalScore: number;
   player: Player;
+  finished: boolean;
 };
 
 export type Frame = {
@@ -20,4 +21,5 @@ export type Frame = {
   score: number;
   spare: boolean;
   strike: boolean;
+  complete: boolean;
 };

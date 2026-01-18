@@ -35,6 +35,7 @@ function AddRoll({ onSubmit }: AddRollProps) {
         value={pins}
         onChange={handleChange}
         className="add-roll-input"
+        autoFocus
       />
       <button
         type="submit"

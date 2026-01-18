@@ -8,6 +8,7 @@ import ee.margus.bowling.repository.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,7 +18,7 @@ public class GameService {
     private GameRepository gameRepository;
 
     public Game addGame(CreatePlayerDTO createPlayerDTO) {
-        if(gameRepository.getGame(createPlayerDTO.getName()) != null) throw new RuntimeException("Cant use same name");
+        if (gameRepository.getGame(createPlayerDTO.getName()) != null) throw new RuntimeException("Cant use same name");
         Player player = createPlayer(createPlayerDTO);
         Game game = new Game();
         game.setId(player.getName());
@@ -25,7 +26,7 @@ public class GameService {
         return gameRepository.saveGame(game);
     }
 
-    private Player createPlayer(CreatePlayerDTO createPlayerDTO){
+    private Player createPlayer(CreatePlayerDTO createPlayerDTO) {
         String id = UUID.randomUUID().toString();
         Player player = new Player();
         player.setId(id);
@@ -41,14 +42,12 @@ public class GameService {
         return gameRepository.getAllGames();
     }
 
-    public List<Game> addRoll(int pins, String gameId) {
+    public Game addRoll(int pins, String gameId) {
         Game game = getGame(gameId);
         game.setFrame(pins);
         game.calculateFrameScores();
-//        game.getFrames().forEach(Frame::updateFields);
-//        game.isFinished();
 
-        return getAllGames();
+        return game;
     }
 
     public void delete(boolean confirm) {

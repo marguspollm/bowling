@@ -77,14 +77,11 @@ class GameServiceTest {
     void givenPins_whenAddRoll_thenUpdateGameAndReturnAllGames() {
         Game game = new Game();
         game.setId("test");
-        List<Game> allGames = List.of(game);
 
         when(gameRepository.getGame("test")).thenReturn(game);
-        when(gameRepository.getAllGames()).thenReturn(allGames);
 
-        List<Game> result = gameService.addRoll(7, "test");
-        assertEquals(1, result.size());
-        assertEquals(7, game.getFrames().getFirst().getRolls().getFirst());
+        Game result = gameService.addRoll(7, "test");
+        assertEquals(7, result.getFrames().getFirst().getRolls().getFirst());
     }
 
     @Test

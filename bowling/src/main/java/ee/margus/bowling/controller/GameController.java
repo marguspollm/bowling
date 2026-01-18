@@ -16,7 +16,7 @@ public class GameController {
     private GameService gameService;
 
     @PostMapping("/roll")
-    public List<Game> addRoll(@RequestBody RollDTO rollDTO) {
+    public Game addRoll(@RequestBody RollDTO rollDTO) {
         return gameService.addRoll(rollDTO.getPins(), rollDTO.getGameId());
     }
 

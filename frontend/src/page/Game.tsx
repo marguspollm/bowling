@@ -48,7 +48,9 @@ function Game() {
         return res.json();
       })
       .then(json => {
-        setGames(json);
+        setGames(prev =>
+          prev.map(game => (game.id === selectedGame?.id ? json : game))
+        );
       })
       .catch(err => alert(err));
   };
@@ -113,10 +115,13 @@ function Game() {
               >
                 <div className="game-header">
                   <span className="game-name">{game.player.name}</span>
+                  {game.finished && (
+                    <span className="game-finished">Finished</span>
+                  )}
                   <span className="game-score">Total: {game.totalScore}</span>
                 </div>
                 <GameDetails game={game} />
-                {isSelected && (
+                {isSelected && !game.finished && (
                   <div className="game-addroll">
                     <AddRoll onSubmit={addRoll} />
                   </div>

@@ -31,4 +31,8 @@ public class GameRepository {
         if(!unFinishedGames.isEmpty() && !confirm) throw new RuntimeException("Some games are still in progress!");
         games.clear();
     }
+
+    public List<String> getGameIds(){
+        return games.keySet().stream().toList();
+    }
 }

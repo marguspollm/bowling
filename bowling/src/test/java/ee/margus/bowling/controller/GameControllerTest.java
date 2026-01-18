@@ -92,12 +92,12 @@ class GameControllerTest {
         Game game = new Game();
         game.setId("test");
 
-        when(gameService.addRoll(anyInt(), anyString())).thenReturn(List.of(game));
+        when(gameService.addRoll(anyInt(), anyString())).thenReturn(game);
 
         mockMvc.perform(post("/roll")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(dto)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].id").value("test"));
+                .andExpect(jsonPath("$.id").value("test"));
     }
 }

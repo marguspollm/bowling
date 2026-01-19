@@ -23,10 +23,9 @@ public class Game {
         return list;
     }
 
-    public Frame setFrame(int pins) {
+    public void setFrame(int pins) {
         Frame currentFrame = frames.stream().filter(frame -> !frame.isComplete()).toList().getFirst();;
         currentFrame.addRoll(pins);
-        return currentFrame;
     }
 
     public void calculateFrameScores() {

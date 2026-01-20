@@ -49,7 +49,7 @@ function Game() {
       })
       .then(json => {
         setGames(prev =>
-          prev.map(game => (game.id === selectedGame?.id ? json : game))
+          prev.map(game => (game.id === selectedGame?.id ? json : game)),
         );
       })
       .catch(err => alert(err));
@@ -64,7 +64,7 @@ function Game() {
     const delFetch = async (confirm?: boolean) => {
       let param = "";
       if (confirm) param += "?confirm=true";
-      const res = await fetch(`${URL}/del${param}`, {
+      const res = await fetch(`${URL}/delete${param}`, {
         method: "DELETE",
       });
       return res;

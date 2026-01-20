@@ -17,6 +17,8 @@ public class GameRepository {
     }
 
     public Game get(String id) {
+        Game dbGame = games.get(id);
+        if (dbGame == null) throw new RuntimeException("Game doesn't exist");
         return games.get(id);
     }
 
@@ -35,15 +37,9 @@ public class GameRepository {
     }
 
     public boolean exists(String name) {
-        var i = games.values()
+        return games.values()
                 .stream()
                 .anyMatch(game -> name.equals(game.getId())
                 );
-        return i;
-    }
-
-    public void update(Game game) {
-        if(!exists(game.getId())) throw new RuntimeException("Game doesn't exist!");
-        games.put(game.getId(), game);
     }
 }

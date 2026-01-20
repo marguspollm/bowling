@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:5173")
 public class GameController {
     @Autowired
     private GameService gameService;
@@ -22,13 +22,8 @@ public class GameController {
     }
 
     @PostMapping("/create")
-    public Game createGame(@RequestBody CreatePlayerDTO createPlayerDTO) {
-        return gameService.addGame(createPlayerDTO);
-    }
-
-    @GetMapping("/game/{id}")
-    public Game getGame(@PathVariable String id) {
-        return gameService.getGame(id);
+    public GameDTO createGame(@RequestBody CreatePlayerDTO createPlayerDTO) {
+        return gameService.createGame(createPlayerDTO);
     }
 
     @GetMapping("/all-games")
@@ -36,7 +31,7 @@ public class GameController {
         return gameService.getAllGames();
     }
 
-    @DeleteMapping("/del")
+    @DeleteMapping("/delete")
     public void deleteAllGames(@RequestParam(defaultValue = "false") boolean confirm) {
         gameService.delete(confirm);
     }

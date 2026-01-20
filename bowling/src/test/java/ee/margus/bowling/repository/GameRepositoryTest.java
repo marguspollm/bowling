@@ -33,7 +33,7 @@ class GameRepositoryTest {
 
     @Test
     void get_thenReturnException() {
-        assertNull(repository.get("bad-id"));
+        assertThrows(RuntimeException.class, () -> repository.get("bad-id"));
     }
 
     @Test

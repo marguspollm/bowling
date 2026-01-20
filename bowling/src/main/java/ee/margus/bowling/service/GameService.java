@@ -55,9 +55,4 @@ public class GameService {
     public void delete(boolean confirm) {
         gameRepository.deleteAll(confirm);
     }
-
-    public GameDTO updateGame(Game game) {
-        gameRepository.update(game);
-        return new GameDTO(game.getId(), game.getTotalScore(), game.getFrames(), game.getPlayer());
-    }
 }

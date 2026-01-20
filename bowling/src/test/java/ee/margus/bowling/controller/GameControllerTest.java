@@ -51,19 +51,6 @@ class GameControllerTest {
     }
 
     @Test
-    void getGame_thenReturnGame() throws Exception {
-        Game game = new Game();
-        game.setId("test");
-
-
-        when(gameService.getGame("test")).thenReturn(game);
-
-        mockMvc.perform(get("/game/test"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").value("test"));
-    }
-
-    @Test
     void getAllGames_thenReturnAllGamesList() throws Exception {
         Game game1 = new Game();
         game1.setId("1");

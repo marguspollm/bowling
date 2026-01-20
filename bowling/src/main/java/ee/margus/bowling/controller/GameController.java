@@ -37,7 +37,7 @@ public class GameController {
     }
 
     @DeleteMapping("/del")
-    public void deleteAllGames(@RequestParam(defaultValue = "false") boolean confirm){
+    public void deleteAllGames(@RequestParam(defaultValue = "false") boolean confirm) {
         gameService.delete(confirm);
     }
 }

@@ -1,6 +1,7 @@
 package ee.margus.bowling.controller;
 
 import ee.margus.bowling.dto.CreatePlayerDTO;
+import ee.margus.bowling.dto.GameDTO;
 import ee.margus.bowling.dto.RollDTO;
 import ee.margus.bowling.model.Game;
 import ee.margus.bowling.service.GameService;
@@ -17,7 +18,7 @@ public class GameController {
 
     @PostMapping("/roll")
     public Game addRoll(@RequestBody RollDTO rollDTO) {
-        return gameService.addRoll(rollDTO.getPins(), rollDTO.getGameId());
+        return gameService.addRoll(rollDTO.pins(), rollDTO.gameId());
     }
 
     @PostMapping("/create")

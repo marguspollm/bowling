@@ -1,38 +1,49 @@
 package ee.margus.bowling.repository;
 
 import ee.margus.bowling.model.Game;
-import ee.margus.bowling.model.Player;
 import org.springframework.stereotype.Repository;
 
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Repository
 public class GameRepository {
-    private final Map<String, Game> games = new LinkedHashMap<>();
+    private final Map<String, Game> games = new ConcurrentHashMap<>();
 
-    public Game saveGame(Game game) {
+    public Game save(Game game) {
         games.put(game.getId(), game);
         return game;
     }
 
-    public Game getGame(String id) {
+    public Game get(String id) {
         return games.get(id);
     }
 
-    public List<Game> getAllGames() {
+    public List<Game> getAll() {
         return games.values().stream().toList();
     }
 
-    public void delete(boolean confirm) {
-        List<Game> unFinishedGames = games.values().stream().filter(game -> !game.isFinished()).toList();
-        if(!unFinishedGames.isEmpty() && !confirm) throw new RuntimeException("Some games are still in progress!");
+    public void deleteAll(boolean confirm) {
+        boolean unFinishedGames = games.values()
+                .stream()
+                .anyMatch(
+                        game -> !game.isFinished()
+                );
+        if (unFinishedGames && !confirm) throw new RuntimeException("Some games are still in progress!");
         games.clear();
     }
 
-    public List<String> getGameIds(){
-        return games.keySet().stream().toList();
+    public boolean exists(String name) {
+        var i = games.values()
+                .stream()
+                .anyMatch(game -> name.equals(game.getId())
+                );
+        return i;
+    }
+
+    public void update(Game game) {
+        if(!exists(game.getId())) throw new RuntimeException("Game doesn't exist!");
+        games.put(game.getId(), game);
     }
 }

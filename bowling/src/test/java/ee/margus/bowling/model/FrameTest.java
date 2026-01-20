@@ -14,6 +14,7 @@ class FrameTest {
         frame.addRoll(5);
         frame.addRoll(4);
 
+        assertTrue(frame.isComplete());
         assertEquals(List.of(5, 4), frame.getRolls());
     }
 
@@ -34,7 +35,7 @@ class FrameTest {
     }
 
     @Test
-    void givenPinsIsTen_thenFrameIsStrikeAndComplete() {
+    void givenStrike_thenFrameIsStrikeAndComplete() {
         Frame frame = new Frame();
         frame.addRoll(10);
 
@@ -43,7 +44,7 @@ class FrameTest {
     }
 
     @Test
-    void whenPinsAreSpare_thenFrameIsSpareAndComplete() {
+    void whenSpare_thenFrameIsSpareAndComplete() {
         Frame frame = new Frame();
         frame.addRoll(3);
         frame.addRoll(7);

@@ -1,8 +1,10 @@
 package ee.margus.bowling.controller;
 
 import ee.margus.bowling.dto.CreatePlayerDTO;
+import ee.margus.bowling.dto.GameDTO;
 import ee.margus.bowling.dto.RollDTO;
 import ee.margus.bowling.model.Game;
+import ee.margus.bowling.model.Player;
 import ee.margus.bowling.service.GameService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,12 +38,10 @@ class GameControllerTest {
     @Test
     void createGame_thenReturnCreatedGame() throws Exception {
         String name = "Test";
-        CreatePlayerDTO dto = new CreatePlayerDTO();
-        dto.setName(name);
-        Game game = new Game();
-        game.setId(name);
+        CreatePlayerDTO dto = new CreatePlayerDTO(name);
+        GameDTO game = new GameDTO(name, 0, List.of(), new Player());
 
-        when(gameService.addGame(any())).thenReturn(game);
+        when(gameService.createGame(any())).thenReturn(game);
 
         mockMvc.perform(post("/create")
                         .contentType(MediaType.APPLICATION_JSON)
@@ -84,10 +84,8 @@ class GameControllerTest {
     }
 
     @Test
-    void addRoll_thenReturnUpdatedGameList() throws Exception{
-        RollDTO dto = new RollDTO();
-        dto.setGameId("test");
-        dto.setPins(3);
+    void addRoll_thenReturnUpdatedGameList() throws Exception {
+        RollDTO dto = new RollDTO(3, "test");
 
         Game game = new Game();
         game.setId("test");
@@ -95,8 +93,8 @@ class GameControllerTest {
         when(gameService.addRoll(anyInt(), anyString())).thenReturn(game);
 
         mockMvc.perform(post("/roll")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(dto)))
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(dto)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value("test"));
     }

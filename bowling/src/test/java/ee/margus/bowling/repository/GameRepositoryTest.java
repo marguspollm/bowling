@@ -18,53 +18,53 @@ class GameRepositoryTest {
     }
 
     @Test
-    void whenSaveGame_thenReturnGame() {
+    void whenSaveGame_thenReturn() {
         Player player = new Player();
         player.setId("test-id");
         player.setName("test");
         Game game = new Game();
         game.setId("test");
         game.setPlayer(player);
-        Game saved = repository.saveGame(game);
+        Game saved = repository.save(game);
 
         assertEquals(game, saved);
-        assertEquals(1, repository.getAllGames().size());
+        assertEquals(1, repository.getAll().size());
     }
 
     @Test
-    void getGame_thenReturnException() {
-        assertNull(repository.getGame("bad-id"));
+    void get_thenReturnException() {
+        assertNull(repository.get("bad-id"));
     }
 
     @Test
-    void whenGetGame_thenReturnGame() {
+    void whenGetGame_thenReturn() {
         Game game = new Game();
         game.setId("test");
 
-        repository.saveGame(game);
-        assertEquals(game, repository.getGame("test"));
+        repository.save(game);
+        assertEquals(game, repository.get("test"));
     }
 
     @Test
-    void getAllGames() {
+    void getAll() {
         for (int i = 0; i < 3; i++) {
             Game game = new Game();
             game.setId("test" + i);
-            repository.saveGame(game);
+            repository.save(game);
         }
 
-        assertEquals(3, repository.getAllGames().size());
+        assertEquals(3, repository.getAll().size());
     }
 
     @Test
-    void givenConfirmIsTrueAndUnfinishedGames_deleteALlGames() {
+    void givenConfirmIsTrueAndUnfinishedGames_deleteAllALlGames() {
         Game game = new Game();
         game.setId("test");
 
-        repository.saveGame(game);
-        repository.delete(true);
+        repository.save(game);
+        repository.deleteAll(true);
 
-        assertEquals(0, repository.getAllGames().size());
+        assertEquals(0, repository.getAll().size());
     }
 
     @Test
@@ -73,10 +73,10 @@ class GameRepositoryTest {
         game.setId("test");
         game.getFrames().getLast().setRolls(List.of(1, 1));
 
-        repository.saveGame(game);
-        repository.delete(true);
+        repository.save(game);
+        repository.deleteAll(true);
 
-        assertEquals(0, repository.getAllGames().size());
+        assertEquals(0, repository.getAll().size());
     }
 
     @Test
@@ -85,10 +85,10 @@ class GameRepositoryTest {
         game.setId("test");
         game.getFrames().getLast().setRolls(List.of(1, 1));
 
-        repository.saveGame(game);
-        repository.delete(false);
+        repository.save(game);
+        repository.deleteAll(false);
 
-        assertEquals(0, repository.getAllGames().size());
+        assertEquals(0, repository.getAll().size());
     }
 
     @Test
@@ -97,8 +97,8 @@ class GameRepositoryTest {
         game.setId("test");
         game.getFrames().getLast().setRolls(List.of(1));
 
-        repository.saveGame(game);
+        repository.save(game);
 
-        assertThrows(RuntimeException.class, () -> repository.delete(false));
+        assertThrows(RuntimeException.class, () -> repository.deleteAll(false));
     }
 }

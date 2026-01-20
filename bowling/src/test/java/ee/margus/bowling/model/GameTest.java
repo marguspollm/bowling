@@ -11,10 +11,10 @@ class GameTest {
     @Test
     void givenNormalRolls_thenScoreIsPinsSum() {
         Game game = new Game();
-        game.setFrame(4);
-        game.setFrame(1);
-        game.setFrame(3);
-        game.setFrame(1);
+        game.addRoll(4);
+        game.addRoll(1);
+        game.addRoll(3);
+        game.addRoll(1);
         game.calculateFrameScores();
 
         assertEquals(9, game.getTotalScore());
@@ -23,10 +23,10 @@ class GameTest {
     @Test
     void givenSpare_thenSpareScoreIsFromNextRoll() {
         Game game = new Game();
-        game.setFrame(4);
-        game.setFrame(6);
-        game.setFrame(3);
-        game.setFrame(1);
+        game.addRoll(4);
+        game.addRoll(6);
+        game.addRoll(3);
+        game.addRoll(1);
         game.calculateFrameScores();
 
         assertEquals(17, game.getTotalScore());
@@ -36,9 +36,9 @@ class GameTest {
     @Test
     void givenStrike_thenStrikeScoreIsFromNextTwoRolls() {
         Game game = new Game();
-        game.setFrame(10);
-        game.setFrame(6);
-        game.setFrame(3);
+        game.addRoll(10);
+        game.addRoll(6);
+        game.addRoll(3);
         game.calculateFrameScores();
 
         assertEquals(28, game.getTotalScore());
@@ -47,9 +47,9 @@ class GameTest {
     @Test
     void givenMultipleStrikes_thenStrikeScoreIsFromNextTwoRolls() {
         Game game = new Game();
-        game.setFrame(10);
-        game.setFrame(10);
-        game.setFrame(10);
+        game.addRoll(10);
+        game.addRoll(10);
+        game.addRoll(10);
         game.calculateFrameScores();
 
         assertEquals(60, game.getTotalScore());
@@ -60,7 +60,7 @@ class GameTest {
     void givenPerfectScore_thenReturn300() {
         Game game = new Game();
         for (int i = 0; i < 12; i++) {
-            game.setFrame(10);
+            game.addRoll(10);
         }
         game.calculateFrameScores();
 
@@ -72,12 +72,12 @@ class GameTest {
     void givenStrikeOnLastRoll_thenAllowThreeRolls() {
         Game game = new Game();
         for (int i = 0; i < 9; i++) {
-            game.setFrame(0);
-            game.setFrame(0);
+            game.addRoll(0);
+            game.addRoll(0);
         }
-        game.setFrame(10);
-        game.setFrame(10);
-        game.setFrame(10);
+        game.addRoll(10);
+        game.addRoll(10);
+        game.addRoll(10);
         game.calculateFrameScores();
 
         assertEquals(30, game.getTotalScore());
@@ -87,12 +87,12 @@ class GameTest {
     void givenSpareOnLastRoll_thenAllowThreeRolls() {
         Game game = new Game();
         for (int i = 0; i < 9; i++) {
-            game.setFrame(0);
-            game.setFrame(0);
+            game.addRoll(0);
+            game.addRoll(0);
         }
-        game.setFrame(6);
-        game.setFrame(4);
-        game.setFrame(10);
+        game.addRoll(6);
+        game.addRoll(4);
+        game.addRoll(10);
         game.calculateFrameScores();
 
         assertEquals(20, game.getTotalScore());
@@ -102,10 +102,10 @@ class GameTest {
     void givenRollAfterTenRolls_thenThrowException() {
         Game game = new Game();
         for (int i = 0; i < 12; i++) {
-            game.setFrame(10);
+            game.addRoll(10);
         }
 
-        assertThrows(RuntimeException.class, () -> game.setFrame(5));
+        assertThrows(RuntimeException.class, () -> game.addRoll(5));
     }
 
     @Test

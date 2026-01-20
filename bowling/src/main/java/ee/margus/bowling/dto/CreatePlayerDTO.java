@@ -1,8 +1,5 @@
 package ee.margus.bowling.dto;
 
-import lombok.Data;
+public record CreatePlayerDTO(String name) {
 
-@Data
-public class CreatePlayerDTO {
-    private String name;
 }

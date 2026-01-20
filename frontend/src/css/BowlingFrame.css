@@ -29,3 +29,10 @@
   font-size: 1rem;
   font-weight: bold;
 }
+
+.edit-input {
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  max-width: 0.9rem;
+}

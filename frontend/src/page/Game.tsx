@@ -78,7 +78,7 @@ function Game() {
         } else {
           if (
             confirm(
-              "Some games are still in progress!\n Are you sure you want to delete all games?"
+              "Some games are still in progress!\n Are you sure you want to delete all games?",
             )
           ) {
             delFetch(true)

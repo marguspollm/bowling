@@ -1,26 +1,26 @@
-# Bowling appliaction
+# Bowling application
 
-Simple in-memory bowling application where you can add players and their bowling scores.
+Simple in-memory bowling application that allows you to add players and their bowling scores.
 
-## To run locally
+## Running locally
 
-**!!! This project uses Java version 21 !!!**
+**!!! ⚠️ This project requires Java version 21 ⚠️ !!!**
 
-Navigate to frontend and run:
+Navigate to `frontend` directory and run:
 
-```
+```bash
 npm install
 npm run dev
 ```
 
-and navigate to bowling and run:
+Then navigate to `bowling` and run:
 
-```
-mvnw.cmd spring-boot:run
-```
-
-or
-
-```
+```bash
 mvnw spring-boot:run
+```
+
+or on Windows
+
+```cmd
+mvnw.cmd spring-boot:run
 ```
